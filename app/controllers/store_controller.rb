@@ -16,7 +16,7 @@ class StoreController < ApplicationController
   end
 
   def index_counter
-    session[:counter] ||= 0
+    session[:counter] ||= 1
     session[:counter] += 1
   end
 end
