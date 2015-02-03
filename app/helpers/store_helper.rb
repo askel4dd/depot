@@ -7,4 +7,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 module StoreHelper
+  def page_title
+    @page_title || "Pragmatic Store"
+  end
 end
