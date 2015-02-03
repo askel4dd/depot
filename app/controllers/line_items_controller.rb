@@ -7,9 +7,9 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class LineItemsController < ApplicationController
-  skip_before_action :authorize, only: :create
+  skip_before_action :authorize, only: [:create, :destroy, :decrement]
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :decrement]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /line_items
@@ -35,8 +35,9 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
+    session[:counter] = 0
     product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
+    @line_item = @cart.add_product(product.id, product.price)
 
     respond_to do |format|
       if @line_item.save
@@ -69,12 +70,31 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
+    @line_item = LineItem.find(params[:id])
+
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url }
+      format.js   {}
+      format.html { redirect_to store_url }
       format.json { head :no_content }
     end
   end
+
+  def decrement
+   #@cart = current_cart
+   @line_item = @cart.decrease(params[:id])
+   respond_to do |format|
+     if @line_item.save
+       format.html { redirect_to store_path, notice: 'LineItem was successfully updated' }
+       format.js   { @current_item = @line_item }
+       format.json { head :ok }
+     else
+       format.html { render action: "edit" }
+       format.json { render json: @line_item.errors, status: :unprocessable_entity }
+     end
+   end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
