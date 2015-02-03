@@ -31,10 +31,9 @@
 <!-- END_HIGHLIGHT -->
   </div>
   <div class="field">
-    <%= f.label :pay_type %><br>
+    <%= f.label :pay_type_id %><br>
 <!-- START_HIGHLIGHT -->
-    <%= f.select :pay_type, Order::PAYMENT_TYPES,
-                  prompt: 'Select a payment method' %>
+    <%= collection_select(:order, :pay_type_id, PayType.all, :id, :name, prompt: "Select Method") %>
 <!-- END_HIGHLIGHT -->
   </div>
   <div class="actions">
