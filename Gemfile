@@ -5,7 +5,9 @@ gem 'rails', '4.0.0'
 
 ruby '2.0.0'
 
-gem 'rails_12factor'
+#gem 'rails_12factor'
+
+gem 'unicorn-rails'
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
@@ -38,6 +40,12 @@ end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
+
+gem 'carrierwave'
+
+gem 'quiet_assets'
+
+gem 'fog'
 
 # Use unicorn as the app server
 # gem 'unicorn'

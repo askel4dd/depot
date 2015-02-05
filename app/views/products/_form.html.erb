@@ -23,8 +23,9 @@
 <!-- END_HIGHLIGHT -->
   </div>
   <div class="field">
-    <%= f.label :image_url %><br>
-    <%= f.text_field :image_url %>
+    <%= f.label :title_image, "upload local file:" %><br>
+    <%= f.file_field :title_image %>
+    <%= f.hidden_field :title_image_cache %>
   </div>
   <div class="field">
     <%= f.label :price %><br>

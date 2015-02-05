@@ -18,8 +18,8 @@ Product.create!(title: 'CoffeeScript',
 	shows you how to hold onto all the power and flexibility of JavaScript
 	while writing clearer, cleaner, and safer code.
       </p>},
-  image_url:   'cs.jpg',    
-  price: 36.00)
+      title_image:   File.open(File.join(Rails.root,'/app/assets/images/cs.jpg',
+  price: 36.00)))
 # . . .
 Product.create!(title: 'Programming Ruby 1.9 & 2.0',
   description:
